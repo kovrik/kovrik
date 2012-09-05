@@ -6,7 +6,7 @@ colorscheme zenburn
 set defsearch=google
 set editor="sakura -e vim -f"
 set tabnumbers
-set gui=none
+" set gui=none
 
 " Russian language keyboard mappings (UTF-8)
 map ё `
@@ -86,3 +86,4 @@ map s :bmarks<Space>
 map S :bmarks!<Space>
 map <A-`> b
 map \' \/\l
+map ; :
