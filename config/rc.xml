@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<openbox_config>
+  <applications>
+    <!-- Match all windows and remove their decorations -->
+    <application class="*">
+      <decor>no</decor>
+    </application>
+  </applications>
+  <keyboard>
+
+    <keybind key="A-Tab">
+      <action name="NextWindow"/>
+    </keybind>
+
+    <keybind key="A-F12">
+      <action name="ToggleAlwaysOnTop"/>
+    </keybind>
+    <keybind key="A-F10">
+      <action name="Resize"/>
+    </keybind>
+    <keybind key="A-F11">
+      <action name="ToggleMaximizeFull"/>
+    </keybind>
+    <keybind key="A-F9">
+      <action name="Iconify"/>
+    </keybind>
+    <keybind key="A-F4">
+      <action name="Close"/>
+    </keybind>
+    <keybind key="W-D">
+      <action name="ToggleShowDesktop"/>
+    </keybind>
+    <!--resize-->
+    <keybind key="A-Up">
+      <action name="ResizeRelative">
+        <top>+5</top>
+      </action>
+    </keybind>
+    <keybind key="C-A-Up">
+      <action name="ResizeRelative">
+        <bottom>-5</bottom>
+      </action>
+    </keybind>
+    <keybind key="A-Down">
+      <action name="ResizeRelative">
+        <bottom>+5</bottom>
+      </action>
+    </keybind>
+    <keybind key="C-A-Down">
+      <action name="ResizeRelative">
+        <top>-5</top>
+      </action>
+    </keybind>
+    <keybind key="A-Left">
+      <action name="ResizeRelative">
+        <left>+5</left>
+      </action>
+    </keybind>
+    <keybind key="C-A-Left">
+      <action name="ResizeRelative">
+        <right>-5</right>
+      </action>
+    </keybind>
+    <keybind key="A-Right">
+        <action name="ResizeRelative">
+        <right>+5</right>
+      </action>
+    </keybind>
+    <keybind key="C-A-Right">
+      <action name="ResizeRelative">
+        <left>-5</left>
+      </action>
+    </keybind>
+    <!-- resize end-->
+    <!-- move -->
+    <keybind key="W-Right">
+      <action name="MoveRelative">
+        <x>+10</x>
+        <y>0</y>
+      </action>
+    </keybind>
+    <keybind key="W-Left">
+      <action name="MoveRelative">
+        <x>-10</x>
+        <y>0</y>
+      </action>
+    </keybind>
+    <keybind key="W-Up">
+      <action name="MoveRelative">
+        <x>0</x>
+        <y>-10</y>
+      </action>
+    </keybind>
+    <keybind key="W-Down">
+      <action name="MoveRelative">
+        <x>0</x>
+        <y>+10</y>
+      </action>
+    </keybind>
+    <!-- move end -->
+  </keyboard>
+</openbox_config>
