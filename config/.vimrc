@@ -1,11 +1,6 @@
 " VIM config
 
-" call pathogen#infect()
-" call pathogen#helptags()
-" call pathogen#runtime_append_all_bundles()
-
 set nocompatible
-
 set modelines=0
 
 " Automatically refresh VIM after vimrc changes
@@ -39,16 +34,13 @@ set ttyfast
 set ruler
 " set undofile
 if version > 720
-	set undofile
-	set undodir=~/vimundo/
+    set undofile
+    set undodir=~/vimundo/
 endif
 
 set cursorline
 set listchars=nbsp:¬,extends:»,precedes:«,trail:~
 set list
-
-" hide menu
-"set guioptions-=m
 
 " hide toolbar
 set guioptions-=T
@@ -60,7 +52,7 @@ set guioptions-=LlRrb
 set wrap " turn on wrapping
 set textwidth=79
 set formatoptions=qrn1
-set colorcolumn=85
+" set colorcolumn=85
 
 set lbr " переносить целые слова
 set hidden " не выгружать буфер когда переключаешься на другой
@@ -87,9 +79,10 @@ set pastetoggle=<F6>
 
 "НАСТРОЙКИ ПОИСКА
 set ignorecase " ics - поиск без учёта регистра символов
-set smartcase " - если искомое выражения содержит символы в верхнем регистре - ищет с учётом регистра, иначе - без учёта
+    set smartcase " - если искомое выражения содержит символы в верхнем регистре - ищет с учётом регистра, иначе - без учёта
 set hls " подсветка результатов поиска
 set incsearch " поиск фрагмента по мере его набора
+noremap <Leader><CR> :nohlsearch<CR>
 
 "НАСТРОЙКИ СВОРАЧИВАНИЯ БЛОКОВ КОДА (фолдинг)
 set foldenable " включить фолдинг
@@ -112,6 +105,7 @@ au FileType crontab,fstab,make set noexpandtab tabstop=8 shiftwidth=8
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
+" set termencoding=utf8
 set ffs=unix,dos,mac " формат файла по умолчанию (влияет на окончания строк) - будет перебираться в указанном порядке
 set fencs=utf-8,cp1251,koi8-r,cp866 " варианты кодировки файла по умолчанию (все файлы по умолчанию сохраняются в этой кодировке)
 
@@ -127,7 +121,7 @@ set guifont=Liberation\ Mono\ Bold\ 12
 """""""""""""""""""""""""""
 
 "NERDTree
-map <F2> :NERDTreeToggle<CR>
+noremap <F2> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 
 "omnicompleteion
@@ -143,7 +137,7 @@ autocmd FileType c set omnifunc=ccomplete#CompleteCpp
 
 "taglist
 set tags=~/.tags
-map <F4> :TlistToggle<CR>
+noremap <F4> :TlistToggle<CR>
 
 set vb
 
@@ -156,27 +150,27 @@ autocmd FileType perl set errorformat=%f:%l:%m
 autocmd FileType perl set autowrite
 
 " make tab in normal mode ident code
-nmap <tab> I<tab><esc>
-nmap <s-tab> ^i<bs><esc>
+nnoremap <tab> I<tab><esc>
+nnoremap <s-tab> ^i<bs><esc>
 
 " make tab in v mode ident code
-vmap <tab> >gv
-vmap <s-tab> <gv
+vnoremap <tab> >gv
+vnoremap <s-tab> <gv
 
 " Treat long lines as break lines (useful when moving around in them)
-map j gj
-map k gk
+noremap j gj
+noremap k gk
 
 " syntax color complex things like @{${"foo"}}
 let perl_extended_vars = 1
 let perl_sync_dist     = 250
 
 " map perltidy (only for selected blocks in visual mode!)
-vmap <Leader>pt :!perltidy -l=0 -lp -cti=1 -pt=2 -bt=2 -sbt=2 -ce <CR>
+vnoremap <Leader>pt :!perltidy -l=0 -lp -cti=1 -pt=2 -bt=2 -sbt=2 -ce <CR>
 " nmap <Leader>pt :%! perltidy -lp -cti=1 -pt=0 -bt=0 -sbt=0 -ce <CR>
 
 " dont use Q for Ex mode
-map Q :q
+noremap Q :q
 
 " indent highlight
 set ts=4 sw=4 et
@@ -215,13 +209,9 @@ function! DoWindowSwap()
     exe 'hide buf' markedBuf
 endfunction
 
-nmap <silent> <leader>mw :call MarkWindowSwap()<CR>
-nmap <silent> <leader>pw :call DoWindowSwap()<CR>
+nnoremap <silent> <leader>mw :call MarkWindowSwap()<CR>
+nnoremap <silent> <leader>pw :call DoWindowSwap()<CR>
 " === swap windows END
-
-let g:indent_guides_autocmds_enabled = 1
-hi IndentGuidesOdd  ctermbg=black
-hi IndentGuidesEven ctermbg=darkgrey
 
 " turns off Vim’s crazy default regex characters and makes searches use normal regexes
 nnoremap / /\v
@@ -267,7 +257,7 @@ inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
 inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
 
 " tagbar binding
-nmap <F8> :TagbarToggle<CR>
+nnoremap <F8> :TagbarToggle<CR>
 
 " swap lines (Alt + j\k)
 set winaltkeys=no " disable menu access via ALT+<key>
@@ -279,42 +269,42 @@ vnoremap <A-j> :m'>+<CR>gv=gv
 vnoremap <A-k> :m-2<CR>gv=gv
 
 " easy switch between windows
-nmap <tab><tab> <C-w>w
+nnoremap <tab><tab> <C-w>w
 
 " reselect visual block after indent
 vnoremap < <gv
 vnoremap > >gv
 
 " force saving files that require root permissions
-cmap w!! %!sudo tee > /dev/null %
+cnoremap w!! %!sudo tee > /dev/null %
 
 " switch between tabs
-map <A-1> 1gt
-map <A-2> 2gt
-map <A-3> 3gt
-map <A-4> 4gt
-map <A-5> 5gt
-map <A-6> 6gt
-map <A-7> 7gt
-map <A-8> 8gt
-map <A-9> 9gt
-map <A-0> 10gt
-imap <A-1> 1gt
-imap <A-2> 2gt
-imap <A-3> 3gt
-imap <A-4> 4gt
-imap <A-5> 5gt
-imap <A-6> 6gt
-imap <A-7> 7gt
-imap <A-8> 8gt
-imap <A-9> 9gt
-imap <A-0> 10gt
+noremap <A-1> 1gt
+noremap <A-2> 2gt
+noremap <A-3> 3gt
+noremap <A-4> 4gt
+noremap <A-5> 5gt
+noremap <A-6> 6gt
+noremap <A-7> 7gt
+noremap <A-8> 8gt
+noremap <A-9> 9gt
+noremap <A-0> 10gt
+inoremap <A-1> 1gt
+inoremap <A-2> 2gt
+inoremap <A-3> 3gt
+inoremap <A-4> 4gt
+inoremap <A-5> 5gt
+inoremap <A-6> 6gt
+inoremap <A-7> 7gt
+inoremap <A-8> 8gt
+inoremap <A-9> 9gt
+inoremap <A-0> 10gt
 
 " toggle centered-view mode on/off
 nnoremap \zz  :let &scrolloff=999-&scrolloff<CR>
 
 " replace tabs with 4 spaces
-map \rt :%s/	/    /g<CR>
+noremap \rt :%s/    /    /g<CR>
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -348,3 +338,9 @@ colorscheme lucius
 
 " switch buffers
 nnoremap <leader>ls :ls<CR>:sb<Space>
+
+" MiniBufExplorer
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1 
