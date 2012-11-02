@@ -103,6 +103,8 @@ set smartindent " Умные отступы (например, автоотст�
 "Для указанных типов файлов отключает замену табов пробелами и меняет ширину отступа
 au FileType crontab,fstab,make set noexpandtab tabstop=8 shiftwidth=8
 
+au FileType scala set tabstop=2 shiftwidth=2 softtabstop=2
+
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 set termencoding=utf8
