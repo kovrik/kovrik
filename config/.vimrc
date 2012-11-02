@@ -54,6 +54,7 @@ set textwidth=79
 set formatoptions=qrn1
 " set colorcolumn=85
 
+set vb
 set lbr " переносить целые слова
 set hidden " не выгружать буфер когда переключаешься на другой
 set mouse=a " включает поддержку мыши при работе в терминале (без GUI)
@@ -82,7 +83,6 @@ set ignorecase " ics - поиск без учёта регистра симво�
     set smartcase " - если искомое выражения содержит символы в верхнем регистре - ищет с учётом регистра, иначе - без учёта
 set hls " подсветка результатов поиска
 set incsearch " поиск фрагмента по мере его набора
-noremap <Leader><CR> :nohlsearch<CR>
 
 "НАСТРОЙКИ СВОРАЧИВАНИЯ БЛОКОВ КОДА (фолдинг)
 set foldenable " включить фолдинг
@@ -105,9 +105,10 @@ au FileType crontab,fstab,make set noexpandtab tabstop=8 shiftwidth=8
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
+set termencoding=utf8
+set fencs=utf-8,cp1251,koi8-r,cp866 " варианты кодировки файла по умолчанию (все файлы по умолчанию сохраняются в этой кодировке)
 " set termencoding=utf8
 set ffs=unix,dos,mac " формат файла по умолчанию (влияет на окончания строк) - будет перебираться в указанном порядке
-set fencs=utf-8,cp1251,koi8-r,cp866 " варианты кодировки файла по умолчанию (все файлы по умолчанию сохраняются в этой кодировке)
 
 "Применять типы файлов
 filetype on
@@ -119,7 +120,6 @@ set guifont=Liberation\ Mono\ Bold\ 12
 """""""""""""""""""""""""""
 " ------- Plugins ------- "
 """""""""""""""""""""""""""
-
 "NERDTree
 noremap <F2> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
@@ -139,8 +139,6 @@ autocmd FileType c set omnifunc=ccomplete#CompleteCpp
 set tags=~/.tags
 noremap <F4> :TlistToggle<CR>
 
-set vb
-
 " show line numbers
 autocmd FileType perl set number
 
@@ -150,16 +148,12 @@ autocmd FileType perl set errorformat=%f:%l:%m
 autocmd FileType perl set autowrite
 
 " make tab in normal mode ident code
-nnoremap <tab> I<tab><esc>
-nnoremap <s-tab> ^i<bs><esc>
+" nnoremap <tab> I<tab><esc>
+" nnoremap <s-tab> ^i<bs><esc>
 
 " make tab in v mode ident code
-vnoremap <tab> >gv
-vnoremap <s-tab> <gv
-
-" Treat long lines as break lines (useful when moving around in them)
-noremap j gj
-noremap k gk
+" vnoremap <tab> >gv
+" vnoremap <s-tab> <gv
 
 " syntax color complex things like @{${"foo"}}
 let perl_extended_vars = 1
@@ -213,6 +207,8 @@ nnoremap <silent> <leader>mw :call MarkWindowSwap()<CR>
 nnoremap <silent> <leader>pw :call DoWindowSwap()<CR>
 " === swap windows END
 
+noremap <Leader><CR> :nohlsearch<CR>
+
 " turns off Vim’s crazy default regex characters and makes searches use normal regexes
 nnoremap / /\v
 vnoremap / /\v
@@ -226,6 +222,8 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
+
+" Treat long lines as break lines (useful when moving around in them)
 nnoremap j gj
 nnoremap k gk
 
@@ -252,7 +250,7 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" use jk to move through omnicomplete list
+" use Tab and jk to move through omnicomplete list
 inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
 inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
 
@@ -269,7 +267,7 @@ vnoremap <A-j> :m'>+<CR>gv=gv
 vnoremap <A-k> :m-2<CR>gv=gv
 
 " easy switch between windows
-nnoremap <tab><tab> <C-w>w
+" nnoremap <tab><tab> <C-w>w
 
 " reselect visual block after indent
 vnoremap < <gv
@@ -302,9 +300,6 @@ inoremap <A-0> 10gt
 
 " toggle centered-view mode on/off
 nnoremap \zz  :let &scrolloff=999-&scrolloff<CR>
-
-" replace tabs with 4 spaces
-noremap \rt :%s/    /    /g<CR>
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -344,3 +339,35 @@ let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1 
+
+" Tab completion 
+function! Smart_TabComplete()
+  let line = getline('.')                         " current line
+
+  let substr = strpart(line, -1, col('.')+1)      " from the start of the current
+                                                  " line to one character right
+                                                  " of the cursor
+  let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
+
+  if (strlen(substr)==0)                          " nothing to match on empty string
+    return "\<tab>"
+  endif
+
+  let has_period = match(substr, '\.') != -1      " position of period, if any
+  let has_slash = match(substr, '\/') != -1       " position of slash, if any
+  if (!has_period && !has_slash)
+    return "\<C-X>\<C-P>"                         " existing text matching
+  elseif ( has_slash )
+    return "\<C-X>\<C-F>"                         " file matching
+  else
+    return "\<C-X>\<C-O>"                         " plugin matching
+  endif
+endfunction
+
+inoremap <tab> <c-r>=Smart_TabComplete()<CR>
+inoremap <C-tab> <c-r>=Smart_TabComplete()<CR>
+
+noremap <F10> :QuickRun<CR>
+
+" xpdf bindings
+:command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
