@@ -127,6 +127,7 @@ noremap <F2> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 
 "omnicompleteion
+set complete-=i
 set ofu=javacomplete#Complete
 autocmd FileType java set omnifunc=javacomplete#CompleteJava
 autocmd FileType python set omnifunc=pythoncomplete#Complete
@@ -373,3 +374,6 @@ noremap <F10> :QuickRun<CR>
 
 " xpdf bindings
 :command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
+
+" force saving files that require root permissions
+cmap w!! %!sudo tee > /dev/null %
