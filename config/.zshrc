@@ -38,3 +38,5 @@ export PATH=/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/u
 export EDITOR="vim"
 
 alias tmux="TERM=screen-256color-bce tmux"
+
+unsetopt correct_all
