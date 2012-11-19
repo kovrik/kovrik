@@ -7,6 +7,9 @@
 
 # i3 config file (v4) #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+focus_follows_mouse no
+
 set $term sakura
 set $editor vim
 set $browser firefox
@@ -14,7 +17,7 @@ set $browser firefox
 set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# font -misc-fixed-medium-r-normal--14-120-75-75-C-70-iso10646-1
 font -*-clean-medium-r-*--14-*-*-*-*-*-*-*
 
 # Use Mouse+$mod to drag floating windows to their wanted position
