@@ -329,6 +329,7 @@ let g:tex_flavor='latex'
 " colorscheme hybrid
 " colorscheme molokai
 colorscheme lucius
+" colorscheme tomorrow-night-bright
 " colorscheme xoria256
 " colorscheme skittles_berry
 
@@ -390,3 +391,4 @@ function! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
