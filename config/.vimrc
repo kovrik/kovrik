@@ -88,7 +88,7 @@ set incsearch " поиск фрагмента по мере его набора
 set foldenable " включить фолдинг
 set foldmethod=indent " определять блоки на основе синтаксиса файла
 set foldcolumn=2 " показать полосу для управления сворачиванием
-set foldlevel=10 " Первый уровень вложенности открыт, остальные закрыты
+set foldlevel=999 " Первый уровень вложенности открыт, остальные закрыты
 
 " always show statusline
 set laststatus=2
@@ -377,3 +377,16 @@ noremap <F10> :QuickRun<CR>
 
 " force saving files that require root permissions
 cmap w!! %!sudo tee > /dev/null %
+
+" toggle folding
+nnoremap <Space> za
+vnoremap <Space> za
+
+" Show syntax highlighting groups for word under cursor
+nmap <C-S-P> :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
