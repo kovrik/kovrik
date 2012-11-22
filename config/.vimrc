@@ -328,10 +328,12 @@ let g:tex_flavor='latex'
 " default color scheme
 " colorscheme hybrid
 " colorscheme molokai
-colorscheme lucius
+" colorscheme lucius
+colorscheme lucius_dark
 " colorscheme tomorrow-night-bright
 " colorscheme xoria256
 " colorscheme skittles_berry
+" colorscheme jellybeans2
 
 " Smart Align - :Tabularize /pattern
 
@@ -384,7 +386,7 @@ nnoremap <Space> za
 vnoremap <Space> za
 
 " Show syntax highlighting groups for word under cursor
-nmap <C-S-P> :call <SID>SynStack()<CR>
+noremap <C-S-I> :call <SID>SynStack()<CR>
 function! <SID>SynStack()
   if !exists("*synstack")
     return
