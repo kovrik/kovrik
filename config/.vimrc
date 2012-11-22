@@ -326,10 +326,20 @@ let g:Powerline_symbols = 'compatible'
 let g:tex_flavor='latex'
 
 " default color scheme
+if has("gui_running")
+    colorscheme lucius_dark
+else
+    if $TERM =~ "-256color"
+        colorscheme lucius_dark
+    else
+        colorscheme lucius_dark
+    endif
+endif
+
 " colorscheme hybrid
 " colorscheme molokai
 " colorscheme lucius
-colorscheme lucius_dark
+" colorscheme lucius_dark
 " colorscheme tomorrow-night-bright
 " colorscheme xoria256
 " colorscheme skittles_berry
