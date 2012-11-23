@@ -150,21 +150,12 @@ autocmd FileType perl set makeprg=perl\ -c\ %\ $*
 autocmd FileType perl set errorformat=%f:%l:%m
 autocmd FileType perl set autowrite
 
-" make tab in normal mode ident code
-" nnoremap <tab> I<tab><esc>
-" nnoremap <s-tab> ^i<bs><esc>
-
-" make tab in v mode ident code
-" vnoremap <tab> >gv
-" vnoremap <s-tab> <gv
-
 " syntax color complex things like @{${"foo"}}
 let perl_extended_vars = 1
 let perl_sync_dist     = 250
 
 " map perltidy (only for selected blocks in visual mode!)
 vnoremap <Leader>pt :!perltidy -l=0 -lp -cti=1 -pt=2 -bt=2 -sbt=2 -ce <CR>
-" nmap <Leader>pt :%! perltidy -lp -cti=1 -pt=0 -bt=0 -sbt=0 -ce <CR>
 
 " dont use Q for Ex mode
 noremap Q :q
@@ -232,9 +223,6 @@ nnoremap k gk
 
 nnoremap ; :
 
-" save on focus lost
-" au FocusLost * :wa
-
 " strip all trailing whitespaces
 nnoremap <leader>s :%s/\s\+$//<cr>:let @/=''<CR>
 
@@ -243,9 +231,6 @@ nnoremap <leader>v V`]
 
 " quickly open vimrc
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
-
-" quickly open new split window
-" nnoremap <leader>w <C-w>v<C-w>l
 
 " quickly move between split windows
 nnoremap <C-h> <C-w>h
@@ -268,13 +253,6 @@ inoremap <A-j> <Esc>:m+<CR>==gi
 inoremap <A-k> <Esc>:m-2<CR>==gi
 vnoremap <A-j> :m'>+<CR>gv=gv
 vnoremap <A-k> :m-2<CR>gv=gv
-
-" easy switch between windows
-" nnoremap <tab><tab> <C-w>w
-
-" reselect visual block after indent
-vnoremap < <gv
-vnoremap > >gv
 
 " force saving files that require root permissions
 cnoremap w!! %!sudo tee > /dev/null %
@@ -303,10 +281,6 @@ inoremap <A-0> 10gt
 
 " toggle centered-view mode on/off
 nnoremap \zz  :let &scrolloff=999-&scrolloff<CR>
-
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 
 " Gundo toggle
 nnoremap <F5> :GundoToggle<CR>
@@ -386,7 +360,7 @@ inoremap <C-tab> <c-r>=Smart_TabComplete()<CR>
 noremap <F10> :QuickRun<CR>
 
 " xpdf bindings
-:command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
+command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
 
 " force saving files that require root permissions
 cmap w!! %!sudo tee > /dev/null %
@@ -403,4 +377,7 @@ function! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
+" make Y behave like other capitals
+nnoremap Y y$
 
