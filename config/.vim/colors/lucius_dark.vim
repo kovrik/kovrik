@@ -17,7 +17,7 @@ hi clear
 if exists("syntax_on")
     syntax reset
 endif
-let colors_name="lucius"
+let colors_name="lucius_dark"
 
 " Some other colors to save
 " blue: 3eb8e5
@@ -30,7 +30,7 @@ let colors_name="lucius"
 " Base color
 " ----------
 hi Normal           guifg=#e0e0e0           guibg=#202020
-hi Normal           ctermfg=253             ctermbg=233
+hi Normal           ctermfg=253             ctermbg=231
 
 
 " Comment Group
@@ -343,3 +343,4 @@ hi Visual           ctermfg=NONE            ctermbg=24
 " visual mode selection when vim is not owning the selection (x11 only)
 hi VisualNOS        guifg=fg                                        gui=underline
 hi VisualNOS        ctermfg=fg                                      cterm=underline
+
