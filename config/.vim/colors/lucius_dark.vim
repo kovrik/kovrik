@@ -30,7 +30,7 @@ let colors_name="lucius_dark"
 " Base color
 " ----------
 hi Normal           guifg=#e0e0e0           guibg=#202020
-hi Normal           ctermfg=253             ctermbg=231
+hi Normal           ctermfg=253             ctermbg=233
 
 
 " Comment Group
