@@ -39,4 +39,5 @@ export EDITOR="vim"
 
 alias tmux="TERM=screen-256color-bce tmux"
 
+unsetopt nomatch
 unsetopt correct_all
