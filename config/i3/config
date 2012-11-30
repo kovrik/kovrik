@@ -159,3 +159,7 @@ bar {
 bindsym   $mod+q exec sakura
 bindsym   $mod+e exec "nautilus --no-desktop ~/"
 
+# Autostart
+exec xxkb
+exec setxkbmap -model pc105 -layout us,ru -option grp:alt_shift_toggle
+exec gnome-settings-daemon
