@@ -41,3 +41,8 @@ alias tmux="TERM=screen-256color-bce tmux"
 
 unsetopt nomatch
 unsetopt correct_all
+
+# VIM-like commands
+alias :o=vim
+alias :e=vim
+alias :q=exit

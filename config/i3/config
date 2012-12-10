@@ -163,3 +163,5 @@ bindsym   $mod+e exec "nautilus --no-desktop ~/"
 exec xxkb
 exec setxkbmap -model pc105 -layout us,ru -option grp:alt_shift_toggle
 exec gnome-settings-daemon
+exec wicd-client
+
