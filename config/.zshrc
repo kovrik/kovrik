@@ -29,7 +29,7 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -43,6 +43,8 @@ unsetopt nomatch
 unsetopt correct_all
 
 # VIM-like commands
-alias :o=vim
-alias :e=vim
-alias :q=exit
+alias :o="vim"
+alias :e="vim"
+alias :q="exit"
+alias l="ls -lha"
+

@@ -3,22 +3,17 @@
 set nocompatible
 set modelines=0
 
-" Automatically refresh VIM after vimrc changes
-autocmd BufWritePost .vimrc source %
+autocmd BufWritePost .vimrc source % " Automatically refresh VIM after vimrc changes
 
-" Default window size
-set lines=51 columns=189
+set lines=51 columns=189 " Default window size
 
-" tun autoindentation on
-set autoindent
+set autoindent " tun autoindentation on
 
-" show line numbers
-set number
+set number " show line numbers
 
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
 
-" For regular expressions turn magic on
-set magic
+set magic " For regular expressions turn magic on
 
 " tab = 4 spaces
 set tabstop=4
@@ -39,8 +34,7 @@ set cursorline
 set listchars=nbsp:¬,extends:»,precedes:«,trail:~
 set list
 
-" hide toolbar
-set guioptions-=T
+set guioptions-=T " hide toolbar
 
 " hide scrollbars
 set guioptions+=LlRrb
@@ -52,16 +46,16 @@ set formatoptions=qrn1
 " set colorcolumn=85
 
 set vb
-set lbr                                    " переносить целые слова
+set lbr                                    " wrap whole words
 set hidden                                 " не выгружать буфер когда переключаешься на другой
 set mouse=a                                " turn on mouse in terminal
 set mousehide                              " hide mouse in insert mode
 set showcmd                                " показывать незавершенные команды в статусбаре (автодополнение ввода)
-set matchpairs+=<:>                        " показывать совпадающие скобки для HTML-тегов
-set showmatch                              " показывать первую парную скобку после ввода второй
-set autoread                               " перечитывать изменённые файлы автоматически
+set matchpairs+=<:>                        " show matching brackets for HTML tags
+set showmatch                              " show first matching parenthesis after inserting the second
+set autoread                               " reread changed files automatically
 set t_Co=256                               " use 256 colors in terminal
-set confirm                                " использовать диалоги вместо сообщений об ошибках
+set confirm                                " use dialogs instead of error messages
 set backspace=indent,eol,start             " backspace обрабатывает отступы, концы строк
 set sessionoptions=curdir,buffers,tabpages " опции сессий - перейти в текущию директорию, использовать буферы и табы
 set noswapfile                             " do not use swap file
@@ -72,8 +66,7 @@ set scrolloff=8
 set sidescrolloff=15
 set sidescroll=1
 
-" keep indentation when pasting
-set pastetoggle=<F6>
+set pastetoggle=<F6> " keep indentation when pasting
 
 " search settings
 set ignorecase " ignore case when searching
@@ -87,18 +80,11 @@ set foldmethod=indent
 set foldcolumn=2      " show folding column
 set foldlevel=999     " do not fold automatically
 
-" always show statusline
-set laststatus=2
-
-let perl_folding=1 " perl classes and functions folding
-let php_folding=1  " php classes and functions folding
+set laststatus=2 " always show statusline
 
 " indent settings
 set cindent     " C-like indents
 set smartindent " smart indentation
-
-au FileType crontab,fstab,make set noexpandtab tabstop=8 shiftwidth=8
-au FileType scala set tabstop=2 shiftwidth=2 softtabstop=2
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -106,8 +92,7 @@ set termencoding=utf8
 set fencs=utf-8,cp1251,koi8-r,cp866 " encodings order
 set ffs=unix,dos,mac " file format order
 
-" syntax highlighting on
-syntax on
+syntax on " syntax highlighting on
 
 " turn on filetypes
 filetype on
@@ -132,6 +117,13 @@ autocmd FileType xml        set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php        set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c          set omnifunc=ccomplete#CompleteCpp
 
+" check perl code with :make
+autocmd FileType perl set makeprg=perl\ -c\ %\ $*
+autocmd FileType perl set errorformat=%f:%l:%m
+
+autocmd FileType crontab,fstab,make set noexpandtab tabstop=8 shiftwidth=8
+autocmd FileType scala set tabstop=2 shiftwidth=2 softtabstop=2
+
 " oh, yeah
 nnoremap <up>     <nop>
 nnoremap <down>   <nop>
@@ -146,19 +138,16 @@ inoremap <right>  <nop>
 set tags=~/.tags
 noremap <F4> :TlistToggle<CR>
 
-" check perl code with :make
-autocmd FileType perl set makeprg=perl\ -c\ %\ $*
-autocmd FileType perl set errorformat=%f:%l:%m
-
 " syntax color complex things like @{${"foo"}}
 let perl_extended_vars = 1
 let perl_sync_dist     = 250
+let perl_folding=1 " perl classes and functions folding
+let php_folding=1  " php classes and functions folding
 
 " map perltidy (only for selected blocks in visual mode!)
 vnoremap <Leader>pt :!perltidy -l=0 -lp -cti=1 -pt=2 -bt=2 -sbt=2 -ce <CR>
 
-" dont use Q for Ex mode
-noremap Q :q
+noremap Q :q " dont use Q for Ex mode
 
 " indent highlight
 set ts=4 sw=4 et
@@ -223,12 +212,10 @@ nnoremap <C-l> <C-w>l
 " use Tab and jk to move through omnicomplete list
 inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
 inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
-inoremap <expr> <Tab> ((pumvisible())?("\<C-n>"):("<Tab>"))
 
 " tagbar binding
 nnoremap <F8> :TagbarToggle<CR>
 
-" swap lines (Alt + j\k)
 set winaltkeys=no " disable menu access via ALT+<key>
 
 " force saving files that require root permissions
@@ -240,7 +227,6 @@ nnoremap \zz  :let &scrolloff=999-&scrolloff<CR>
 " Gundo toggle
 nnoremap <F5> :GundoToggle<CR>
 
-" EasyMotion leader key
 let g:EasyMotion_leader_key = '<Leader>'
 
 highlight   NonText      guifg=#444444   guibg=#333333
@@ -306,9 +292,6 @@ function! Smart_TabComplete()
     return "\<C-X>\<C-O>"                         " plugin matching
   endif
 endfunction
-
-" inoremap <tab> <c-r>=Smart_TabComplete()<CR>
-inoremap <C-tab> <c-r>=Smart_TabComplete()<CR>
 
 noremap <F10> :QuickRun<CR>
 
