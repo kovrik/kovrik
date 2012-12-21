@@ -334,3 +334,9 @@ noremap <Leader>rq :VimuxCloseRunner<CR>
 noremap <Leader>rs :VimuxInterruptRunner<CR>
 " vimux bindings end ========================
 
+" clear settings if editing crontab
+autocmd BufNewFile,BufRead crontab.* setfiletype crontab
+autocmd FileType crontab set nobackup
+autocmd FileType crontab set noswapfile
+autocmd FileType crontab set noundofile
+
