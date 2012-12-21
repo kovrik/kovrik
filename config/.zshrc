@@ -38,7 +38,7 @@ export PATH=/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/u
 export EDITOR="vim"
 export TERM="xterm-256color"
 
-alias tmux="TERM=xterm-256color tmux"
+alias tmux="TERM=xterm-256color tmux -2"
 
 unsetopt nomatch
 unsetopt correct_all
