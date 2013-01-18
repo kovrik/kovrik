@@ -231,8 +231,6 @@ let g:EasyMotion_leader_key = '<Leader>'
 
 highlight   NonText      guifg=#444444   guibg=#333333
 highlight   SpecialKey   guifg=#333333
-highlight   MatchParen   cterm=bold      ctermbg=NONE    ctermfg=cyan
-highlight   MatchParen   guibg=NONE      guifg=cyan
 
 " powerline
 let g:Powerline_symbols = 'fancy'
@@ -340,3 +338,8 @@ autocmd FileType crontab set nobackup
 autocmd FileType crontab set noswapfile
 autocmd FileType crontab set noundofile
 
+" Underline the current line with dashes in normal mode
+nnoremap <F6> yyp<c-v>$r-
+
+" Underline the current line with dashes in insert mode
+inoremap <F6> <Esc>yyp<c-v>$r-A
