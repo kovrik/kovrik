@@ -16,7 +16,7 @@ font -*-terminus-medium-r-*--14-*-*-*-*-*-iso10646-*
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec sakura
+bindsym $mod+Return exec urxvt
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -148,7 +148,15 @@ bindsym $mod+q exec sakura
 bindsym $mod+e exec "nautilus --no-desktop ~/"
 
 # Autostart
+exec gnome-settings-daemon
+exec xrdb -load ~/.Xdefaults
 exec xxkb
 exec setxkbmap -model pc105 -layout us,ru -option grp:alt_shift_toggle
-exec gnome-settings-daemon
+
+## Colours
+#colourclass               border  bckgrnd text
+# client.focused             #1793D0 #1793D0 #FFFFFF
+# client.focused_inactive    #000000 #333333 #FFFFFF
+# client.unfocused           #000000 #333333 #FFFFFF
+# client.urgent              #FF0000 #FF0000 #FF0000
 
