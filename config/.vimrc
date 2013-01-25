@@ -1,6 +1,49 @@
 " VIM config
-
 set nocompatible
+filetype off                   " required!
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'c9s/perlomni.vim'
+Bundle 'gmarik/vundle'
+Bundle 'godlygeek/tabular'
+Bundle 'Townk/vim-autoclose'
+Bundle 'vim-scripts/closetag.vim'
+Bundle 'vim-scripts/Colour-Sampler-Pack'
+Bundle 'vim-scripts/perl-support.vim'
+Bundle 'vim-scripts/pmd.vim'
+Bundle 'kien/ctrlp.vim'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-fugitive'
+Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'fholgado/minibufexpl.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'thinca/vim-quickrun'
+Bundle 'aaronbieber/quicktask'
+Bundle 'xolox/vim-session'
+Bundle 'scrooloose/syntastic'
+Bundle 'majutsushi/tagbar'
+Bundle 'garbas/vim-snipmate'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'honza/snipmate-snippets'
+Bundle 'vim-scripts/tComment'
+Bundle 'benmills/vimux'
+Bundle 'vim-scripts/VisIncr'
+" Bundle 'ervandew/eclim'
+
+Bundle 'CSApprox'
+Bundle 'Gundo'
+Bundle 'ZenCoding.vim'
+Bundle 'MatchTag'
+Bundle 'Mark'
+Bundle 'matchit.zip'
+
 set modelines=0
 
 autocmd BufWritePost .vimrc source % " Automatically refresh VIM after vimrc changes
@@ -94,11 +137,6 @@ set ffs=unix,dos,mac " file format order
 
 syntax on " syntax highlighting on
 
-" turn on filetypes
-filetype on
-filetype plugin on
-filetype indent on
-
 set guifont=Liberation\ Mono\ Bold\ 12
 
 " NERDTree
@@ -133,10 +171,6 @@ inoremap <up>     <nop>
 inoremap <down>   <nop>
 inoremap <left>   <nop>
 inoremap <right>  <nop>
-
-" taglist
-set tags=~/.tags
-noremap <F4> :TlistToggle<CR>
 
 " syntax color complex things like @{${"foo"}}
 let perl_extended_vars = 1
@@ -212,9 +246,6 @@ nnoremap <C-l> <C-w>l
 " use Tab and jk to move through omnicomplete list
 inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
 inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
-
-" tagbar binding
-nnoremap <F8> :TagbarToggle<CR>
 
 set winaltkeys=no " disable menu access via ALT+<key>
 
@@ -343,3 +374,9 @@ nnoremap <F6> yyp<c-v>$r-
 
 " Underline the current line with dashes in insert mode
 inoremap <F6> <Esc>yyp<c-v>$r-A
+
+" turn on filetypes
+filetype on
+filetype plugin on
+filetype indent on
+
