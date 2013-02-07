@@ -7,8 +7,9 @@ call vundle#rc()
 
 " let Vundle manage Vundle
 " required! 
-Bundle 'c9s/perlomni.vim'
 Bundle 'gmarik/vundle'
+"""""""""""""""""""""""""""
+Bundle 'c9s/perlomni.vim'
 Bundle 'godlygeek/tabular'
 Bundle 'Townk/vim-autoclose'
 Bundle 'vim-scripts/closetag.vim'
@@ -35,7 +36,9 @@ Bundle 'honza/snipmate-snippets'
 Bundle 'vim-scripts/tComment'
 Bundle 'benmills/vimux'
 Bundle 'vim-scripts/VisIncr'
+Bundle 'wikitopian/hardmode'
 " Bundle 'ervandew/eclim'
+" Bundle 'Valloric/YouCompleteMe'
 
 Bundle 'CSApprox'
 Bundle 'Gundo'
