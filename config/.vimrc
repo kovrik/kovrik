@@ -29,7 +29,7 @@ Bundle 'aaronbieber/quicktask'
 Bundle 'xolox/vim-session'
 Bundle 'scrooloose/syntastic'
 Bundle 'majutsushi/tagbar'
-Bundle 'garbas/vim-snipmate'
+" Bundle 'garbas/vim-snipmate'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'honza/snipmate-snippets'
@@ -38,7 +38,8 @@ Bundle 'benmills/vimux'
 Bundle 'vim-scripts/VisIncr'
 Bundle 'wikitopian/hardmode'
 " Bundle 'ervandew/eclim'
-" Bundle 'Valloric/YouCompleteMe'
+Bundle 'Shougo/neocomplcache'
+Bundle 'Shougo/neosnippet'
 
 Bundle 'CSApprox'
 Bundle 'Gundo'
@@ -145,6 +146,50 @@ set guifont=Liberation\ Mono\ Bold\ 12
 " NERDTree
 noremap <F2> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
+
+" neocomplcache settings ---------------------
+" Turn neocomplcache on
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Use camel case completion.
+let g:neocomplcache_enable_camel_case_completion = 1
+" Use underscore completion.
+let g:neocomplcache_enable_underbar_completion = 1
+" Sets minimum char length of syntax keyword.
+let g:neocomplcache_min_syntax_length = 3
+" buffer file name pattern that locks neocomplcache. e.g. ku.vim or fuzzyfinder 
+let g:neocomplcache_lock_buffer_name_pattern = '\*ctrp\*'
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <expr><CR>   neocomplcache#smart_close_popup() . "\<CR>"
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h>  neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS>   neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+" neocomplcache settings end -----------------
+
+" neosnippet settings ------------------------
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
+" neosnippet settings end --------------------
 
 " omnicompleteion
 set complete-=i
