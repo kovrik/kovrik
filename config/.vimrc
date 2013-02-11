@@ -45,7 +45,6 @@ Bundle 'CSApprox'
 Bundle 'Gundo'
 Bundle 'ZenCoding.vim'
 Bundle 'MatchTag'
-Bundle 'Mark'
 Bundle 'matchit.zip'
 
 set modelines=0
