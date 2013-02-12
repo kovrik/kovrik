@@ -36,9 +36,11 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 export PATH=/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/kovrik/.rvm/bin
 export EDITOR="vim"
-export TERM="screen-256color"
+# export TERM="screen-256color"
+# export TERM="xterm-256color"
 
-# alias tmux="TERM=xterm-256color tmux -2"
+# alias tmux="TERM=xterm-256color tmux"
+alias tmux="tmux -2"
 
 unsetopt nomatch
 unsetopt correct_all
