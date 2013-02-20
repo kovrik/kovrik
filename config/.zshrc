@@ -29,8 +29,10 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git zsh-syntax-highlighting)
-
+plugins=(git)
+# plugins=(git zsh-syntax-highlighting)
+#ZSH_HIGHLIGHT_STYLES[path]=''
+#
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
@@ -53,5 +55,4 @@ alias l="ls -lha"
 
 PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info) %{$fg_bold[blue]%}%{$fg[yellow]%}%(1j.[%j] .)% %{$reset_color%}'
 
-ZSH_HIGHLIGHT_STYLES[path]=''
 
