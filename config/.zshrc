@@ -51,3 +51,7 @@ alias :e="vim"
 alias :q="exit"
 alias l="ls -lha"
 
+PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info) %{$fg_bold[blue]%}%{$fg[yellow]%}%(1j.[%j] .)% %{$reset_color%}'
+
+ZSH_HIGHLIGHT_STYLES[path]=''
+
