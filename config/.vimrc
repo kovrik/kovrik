@@ -12,7 +12,6 @@ Bundle 'gmarik/vundle'
 Bundle 'c9s/perlomni.vim'
 Bundle 'godlygeek/tabular'
 Bundle 'Townk/vim-autoclose'
-Bundle 'vim-scripts/closetag.vim'
 Bundle 'vim-scripts/Colour-Sampler-Pack'
 Bundle 'vim-scripts/perl-support.vim'
 Bundle 'vim-scripts/pmd.vim'
@@ -40,6 +39,7 @@ Bundle 'wikitopian/hardmode'
 " Bundle 'ervandew/eclim'
 Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/neosnippet'
+Bundle 'vim-scripts/closetag.vim'
 
 Bundle 'CSApprox'
 Bundle 'Gundo'
@@ -273,7 +273,7 @@ vnoremap > >gv
 nnoremap j gj
 nnoremap k gk
 
-nnoremap ; :
+" nnoremap ; :
 
 " strip all trailing whitespaces
 nnoremap <leader>s :%s/\s\+$//<cr>:let @/=''<CR>
