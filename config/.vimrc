@@ -311,7 +311,12 @@ highlight   NonText      guifg=#444444   guibg=#333333
 highlight   SpecialKey   guifg=#333333
 
 " powerline
-let g:Powerline_symbols = 'fancy'
+" let g:Powerline_symbols = 'fancy'
+if has("gui_running")
+  let g:Powerline_symbols = 'fancy'
+else
+  let g:Powerline_symbols = 'compatible'
+endif
 " let g:Powerline_symbols = 'compatible'
 
 let g:tex_flavor='latex'
