@@ -33,7 +33,7 @@ Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'honza/snipmate-snippets'
 Bundle 'vim-scripts/tComment'
-Bundle 'benmills/vimux'
+" Bundle 'benmills/vimux'
 Bundle 'vim-scripts/VisIncr'
 Bundle 'wikitopian/hardmode'
 " Bundle 'ervandew/eclim'
@@ -46,19 +46,15 @@ Bundle 'Gundo'
 Bundle 'ZenCoding.vim'
 Bundle 'MatchTag'
 Bundle 'matchit.zip'
-
-set modelines=0
-
+Bundle 'VimOutliner'
+""""""""""""""""""""""""""""""""""""""""""""
 autocmd BufWritePost .vimrc source % " Automatically refresh VIM after vimrc changes
 
+set modelines=0
 set lines=51 columns=189 " Default window size
-
 set autoindent " tun autoindentation on
-
 set number " show line numbers
-
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
-
 set magic " For regular expressions turn magic on
 
 " tab = 4 spaces
@@ -121,12 +117,12 @@ set hls        " highlight search results
 set incsearch  " incremental search
 
 " folding settings
-set foldenable        " enable folding
+set foldenable          " enable folding
 set foldmethod=indent
 set foldcolumn=2      " show folding column
-set foldlevel=999     " do not fold automatically
+set foldlevel=999    " do not fold automatically
 
-set laststatus=2 " always show statusline
+set laststatus=2      " always show statusline
 
 " indent settings
 set cindent     " C-like indents
@@ -222,8 +218,8 @@ inoremap <right>  <nop>
 " syntax color complex things like @{${"foo"}}
 let perl_extended_vars = 1
 let perl_sync_dist     = 250
-let perl_folding=1 " perl classes and functions folding
-let php_folding=1  " php classes and functions folding
+let perl_folding       = 1 " perl classes and functions folding
+let php_folding        = 1  " php classes and functions folding
 
 " map perltidy (only for selected blocks in visual mode!)
 vnoremap <Leader>pt :!perltidy -l=0 -lp -cti=1 -pt=2 -bt=2 -sbt=2 -ce <CR>
@@ -311,13 +307,11 @@ highlight   NonText      guifg=#444444   guibg=#333333
 highlight   SpecialKey   guifg=#333333
 
 " powerline
-" let g:Powerline_symbols = 'fancy'
 if has("gui_running")
   let g:Powerline_symbols = 'fancy'
 else
   let g:Powerline_symbols = 'compatible'
 endif
-" let g:Powerline_symbols = 'compatible'
 
 let g:tex_flavor='latex'
 
@@ -376,9 +370,6 @@ endfunction
 
 noremap <F10> :QuickRun<CR>
 
-" xpdf bindings
-command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
-
 " toggle folding
 nnoremap <Space> za
 vnoremap <Space> za
@@ -397,22 +388,22 @@ nnoremap Y y$
 
 " vimux bindings begin =======================
 " Prompt for a command to run
-noremap <Leader>rp :VimuxPromptCommand<CR>
-
-" Run last command executed by VimuxRunCommand
-noremap <Leader>rl :VimuxRunLastCommand<CR>
-
-" Inspect runner pane
-noremap <Leader>ri :VimuxInspectRunner<CR>
-
-" Close all other tmux panes in current window
-noremap <Leader>rx :VimuxClosePanes
-
-" Close vim tmux runner opened by VimuxRunCommand
-noremap <Leader>rq :VimuxCloseRunner<CR>
-
-" Interrupt any command running in the runner pane
-noremap <Leader>rs :VimuxInterruptRunner<CR>
+" noremap <Leader>rp :VimuxPromptCommand<CR>
+" 
+" " Run last command executed by VimuxRunCommand
+" noremap <Leader>rl :VimuxRunLastCommand<CR>
+" 
+" " Inspect runner pane
+" noremap <Leader>ri :VimuxInspectRunner<CR>
+" 
+" " Close all other tmux panes in current window
+" noremap <Leader>rx :VimuxClosePanes
+" 
+" " Close vim tmux runner opened by VimuxRunCommand
+" noremap <Leader>rq :VimuxCloseRunner<CR>
+" 
+" " Interrupt any command running in the runner pane
+" noremap <Leader>rs :VimuxInterruptRunner<CR>
 " vimux bindings end ========================
 
 " clear settings if editing crontab
