@@ -1,5 +1,6 @@
 " VIM config
 set nocompatible
+" =============== VUNDLE BEGIN ==============
 filetype off                   " required!
 
 set rtp+=~/.vim/bundle/vundle/
@@ -11,7 +12,8 @@ Bundle 'gmarik/vundle'
 """""""""""""""""""""""""""
 Bundle 'c9s/perlomni.vim'
 Bundle 'godlygeek/tabular'
-Bundle 'Townk/vim-autoclose'
+" Bundle 'Townk/vim-autoclose'
+Bundle 'Raimondi/delimitMate'
 Bundle 'vim-scripts/Colour-Sampler-Pack'
 Bundle 'vim-scripts/perl-support.vim'
 Bundle 'vim-scripts/pmd.vim'
@@ -33,7 +35,6 @@ Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'honza/snipmate-snippets'
 Bundle 'vim-scripts/tComment'
-" Bundle 'benmills/vimux'
 Bundle 'vim-scripts/VisIncr'
 Bundle 'wikitopian/hardmode'
 " Bundle 'ervandew/eclim'
@@ -47,9 +48,8 @@ Bundle 'ZenCoding.vim'
 Bundle 'MatchTag'
 Bundle 'matchit.zip'
 Bundle 'VimOutliner'
-""""""""""""""""""""""""""""""""""""""""""""
-autocmd BufWritePost .vimrc source % " Automatically refresh VIM after vimrc changes
-
+Bundle 'javacomplete'
+" =============== VUNDLE END ==============
 set modelines=0
 set lines=51 columns=189 " Default window size
 set autoindent " tun autoindentation on
@@ -136,13 +136,19 @@ set ffs=unix,dos,mac " file format order
 
 syntax on " syntax highlighting on
 
+set winaltkeys=no " disable menu access via ALT+<key>
+
 set guifont=Liberation\ Mono\ Bold\ 12
 
-" NERDTree
-noremap <F2> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 
-" neocomplcache settings ---------------------
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
 " Turn neocomplcache on
 let g:neocomplcache_enable_at_startup = 1
 " Use smartcase.
@@ -156,39 +162,17 @@ let g:neocomplcache_min_syntax_length = 3
 " buffer file name pattern that locks neocomplcache. e.g. ku.vim or fuzzyfinder 
 let g:neocomplcache_lock_buffer_name_pattern = '\*ctrp\*'
 
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <expr><CR>   neocomplcache#smart_close_popup() . "\<CR>"
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h>  neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS>   neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
-" neocomplcache settings end -----------------
-
-" neosnippet settings ------------------------
-" Plugin key-mappings.
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
-
-" Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
-" neosnippet settings end --------------------
+" syntastic tweaks
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_jump=1
 
 " omnicompleteion
 set complete-=i
 set ofu=javacomplete#Complete
+
+" ========= AUTOCOMMANDS BEGIN  ======================
+autocmd BufWritePost .vimrc source % " Automatically refresh VIM after vimrc changes
+
 autocmd FileType java       set omnifunc=javacomplete#CompleteJava
 autocmd FileType python     set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
@@ -205,29 +189,20 @@ autocmd FileType perl set errorformat=%f:%l:%m
 autocmd FileType crontab,fstab,make set noexpandtab tabstop=8 shiftwidth=8
 autocmd FileType scala set tabstop=2 shiftwidth=2 softtabstop=2
 
-" oh, yeah
-nnoremap <up>     <nop>
-nnoremap <down>   <nop>
-nnoremap <left>   <nop>
-nnoremap <right>  <nop>
-inoremap <up>     <nop>
-inoremap <down>   <nop>
-inoremap <left>   <nop>
-inoremap <right>  <nop>
+" clear settings if editing crontab
+autocmd BufNewFile,BufRead crontab.* setfiletype crontab
+autocmd FileType crontab set nobackup
+autocmd FileType crontab set noswapfile
+autocmd FileType crontab set noundofile
+" ========= AUTOCOMMANDS END  ======================
 
 " syntax color complex things like @{${"foo"}}
 let perl_extended_vars = 1
 let perl_sync_dist     = 250
-let perl_folding       = 1 " perl classes and functions folding
+let perl_folding       = 1  " perl classes and functions folding
 let php_folding        = 1  " php classes and functions folding
 
-" map perltidy (only for selected blocks in visual mode!)
-vnoremap <Leader>pt :!perltidy -l=0 -lp -cti=1 -pt=2 -bt=2 -sbt=2 -ce <CR>
-
-noremap Q :q " dont use Q for Ex mode
-
 " indent highlight
-set ts=4 sw=4 et
 let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size  = 1
 
@@ -251,10 +226,50 @@ function! DoWindowSwap()
     exe 'hide buf' markedBuf
 endfunction
 
-nnoremap <silent> <leader>mw :call MarkWindowSwap()<CR>
-nnoremap <silent> <leader>pw :call DoWindowSwap()<CR>
 " === swap windows END
 
+" ====== KEY BINDINGS BEGIN ====================
+nnoremap <silent> <leader>mw :call MarkWindowSwap()<CR>
+nnoremap <silent> <leader>pw :call DoWindowSwap()<CR>
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <expr><CR>   neocomplcache#smart_close_popup() . "\<CR>"
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h>  neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS>   neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+" neocomplcache settings end -----------------
+
+" neosnippet settings ------------------------
+" Plugin key-mappings.
+inoremap <C-k> <Plug>(neosnippet_expand_or_jump)
+snoremap <C-k> <Plug>(neosnippet_expand_or_jump)
+
+" SuperTab like snippets behavior.
+inoremap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+snoremap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" NERDTree
+noremap <F2> :NERDTreeToggle<CR>
+
+" map perltidy (only for selected blocks in visual mode!)
+vnoremap <Leader>pt :!perltidy -l=0 -lp -cti=1 -pt=2 -bt=2 -sbt=2 -ce <CR>
+
+noremap Q :q " dont use Q for Ex mode
+
+" disable arrows
+nnoremap <up>     <nop>
+nnoremap <down>   <nop>
+nnoremap <left>   <nop>
+nnoremap <right>  <nop>
+inoremap <up>     <nop>
+inoremap <down>   <nop>
+inoremap <left>   <nop>
+inoremap <right>  <nop>
 noremap <Leader><CR> :nohlsearch<CR>
 
 " turns off Vim’s crazy default regex characters and makes searches use normal regexes
@@ -286,12 +301,8 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" use Tab and jk to move through omnicomplete list
-" inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
-" inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
-
-set winaltkeys=no " disable menu access via ALT+<key>
-
+" delete into the black hole register
+nnoremap <leader>d "_d
 " force saving files that require root permissions
 cnoremap w!! %!sudo tee > /dev/null %
 
@@ -301,10 +312,32 @@ nnoremap \zz  :let &scrolloff=999-&scrolloff<CR>
 " Gundo toggle
 nnoremap <F5> :GundoToggle<CR>
 
-let g:EasyMotion_leader_key = '<Leader>'
+" switch buffers
+nnoremap <leader>ls :ls<CR>:sb<Space>
 
-highlight   NonText      guifg=#444444   guibg=#333333
-highlight   SpecialKey   guifg=#333333
+noremap <F10> :QuickRun<CR>
+
+" toggle folding
+nnoremap <Space> za
+vnoremap <Space> za
+
+" make Y behave like other capitals
+nnoremap Y y$
+
+" Underline the current line with dashes in normal mode
+nnoremap <F6> yyp<c-v>$r-
+
+" Underline the current line with dashes in insert mode
+inoremap <F6> <Esc>yyp<c-v>$r-A
+
+" use Tab and jk to move through omnicomplete list
+" inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
+" inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
+
+noremap <C-S-I> :call <SID>SynStack()<CR>
+" ====== KEY BINDINGS END  ====================
+
+let g:EasyMotion_leader_key = '<Leader>'
 
 " powerline
 if has("gui_running")
@@ -316,6 +349,7 @@ endif
 let g:tex_flavor='latex'
 
 " default color scheme
+" colorscheme hybrid, molokai, lucius, lucius_dark, tomorrow-night-bright, xoria256, skittles_berry, jellybeans2, zenburn
 if has("gui_running")
     colorscheme lucius_dark
 else
@@ -325,20 +359,6 @@ else
         colorscheme lucius_dark
     endif
 endif
-
-" colorscheme hybrid
-" colorscheme molokai
-" colorscheme lucius
-" colorscheme lucius_dark
-" colorscheme tomorrow-night-bright
-" colorscheme xoria256
-" colorscheme skittles_berry
-" colorscheme jellybeans2
-
-" Smart Align - :Tabularize /pattern
-
-" switch buffers
-nnoremap <leader>ls :ls<CR>:sb<Space>
 
 " MiniBufExplorer
 let g:miniBufExplMapWindowNavVim    = 1
@@ -368,14 +388,7 @@ function! Smart_TabComplete()
   endif
 endfunction
 
-noremap <F10> :QuickRun<CR>
-
-" toggle folding
-nnoremap <Space> za
-vnoremap <Space> za
-
 " Show syntax highlighting groups for word under cursor
-noremap <C-S-I> :call <SID>SynStack()<CR>
 function! <SID>SynStack()
   if !exists("*synstack")
     return
@@ -383,40 +396,8 @@ function! <SID>SynStack()
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
-" make Y behave like other capitals
-nnoremap Y y$
-
-" vimux bindings begin =======================
-" Prompt for a command to run
-" noremap <Leader>rp :VimuxPromptCommand<CR>
-" 
-" " Run last command executed by VimuxRunCommand
-" noremap <Leader>rl :VimuxRunLastCommand<CR>
-" 
-" " Inspect runner pane
-" noremap <Leader>ri :VimuxInspectRunner<CR>
-" 
-" " Close all other tmux panes in current window
-" noremap <Leader>rx :VimuxClosePanes
-" 
-" " Close vim tmux runner opened by VimuxRunCommand
-" noremap <Leader>rq :VimuxCloseRunner<CR>
-" 
-" " Interrupt any command running in the runner pane
-" noremap <Leader>rs :VimuxInterruptRunner<CR>
-" vimux bindings end ========================
-
-" clear settings if editing crontab
-autocmd BufNewFile,BufRead crontab.* setfiletype crontab
-autocmd FileType crontab set nobackup
-autocmd FileType crontab set noswapfile
-autocmd FileType crontab set noundofile
-
-" Underline the current line with dashes in normal mode
-nnoremap <F6> yyp<c-v>$r-
-
-" Underline the current line with dashes in insert mode
-inoremap <F6> <Esc>yyp<c-v>$r-A
+highlight   NonText      guifg=#444444   guibg=#333333
+highlight   SpecialKey   guifg=#333333
 
 " turn on filetypes
 filetype on
