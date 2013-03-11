@@ -7,7 +7,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-" required! 
+" required!
 Bundle 'gmarik/vundle'
 """""""""""""""""""""""""""
 Bundle 'c9s/perlomni.vim'
@@ -97,6 +97,7 @@ set matchpairs+=<:>                        " show matching brackets for HTML tag
 set showmatch                              " show first matching parenthesis after inserting the second
 set autoread                               " reread changed files automatically
 set t_Co=256                               " use 256 colors in terminal
+set t_ut=
 set confirm                                " use dialogs instead of error messages
 set backspace=indent,eol,start             " backspace обрабатывает отступы, концы строк
 set sessionoptions=curdir,buffers,tabpages " опции сессий - перейти в текущию директорию, использовать буферы и табы
@@ -159,7 +160,7 @@ let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
 " Sets minimum char length of syntax keyword.
 let g:neocomplcache_min_syntax_length = 3
-" buffer file name pattern that locks neocomplcache. e.g. ku.vim or fuzzyfinder 
+" buffer file name pattern that locks neocomplcache. e.g. ku.vim or fuzzyfinder
 let g:neocomplcache_lock_buffer_name_pattern = '\*ctrp\*'
 
 " syntastic tweaks
