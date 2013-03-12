@@ -41,8 +41,8 @@ Bundle 'vim-scripts/closetag.vim'
 " Bundle 'nathanaelkane/vim-indent-guides'
 " Bundle 'garbas/vim-snipmate'
 " Bundle 'Townk/vim-autoclose'
+" Bundle 'Gundo'
 Bundle 'CSApprox'
-Bundle 'Gundo'
 Bundle 'ZenCoding.vim'
 Bundle 'MatchTag'
 Bundle 'matchit.zip'
@@ -311,7 +311,7 @@ cnoremap w!! %!sudo tee > /dev/null %
 nnoremap \zz  :let &scrolloff=999-&scrolloff<CR>
 
 " Gundo toggle
-nnoremap <F5> :GundoToggle<CR>
+" nnoremap <F5> :GundoToggle<CR>
 
 " switch buffers
 nnoremap <leader>ls :ls<CR>:sb<Space>
