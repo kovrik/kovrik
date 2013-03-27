@@ -47,6 +47,7 @@ Bundle 'ZenCoding.vim'
 Bundle 'MatchTag'
 Bundle 'matchit.zip'
 Bundle 'javacomplete'
+Bundle 'EasyGrep'
 " Bundle 'VimOutliner'
 " =============== VUNDLE END ==============
 " set background=dark
@@ -351,6 +352,7 @@ let g:tex_flavor='latex'
 
 " default color scheme
 " colorscheme hybrid, molokai, lucius, lucius_dark, tomorrow-night-bright, xoria256, skittles_berry, jellybeans2, zenburn
+set background=dark
 if has("gui_running")
     colorscheme lucius_dark
 else
@@ -362,6 +364,9 @@ else
 endif
 
 " MiniBufExplorer
+let g:miniBufExplCheckDupeBufs      = 1
+let g:miniBufExplorerAutoUpdate     = 1
+let g:miniBufExplForceDisplay       = 1
 let g:miniBufExplMapWindowNavVim    = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs  = 1
