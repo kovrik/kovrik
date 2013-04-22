@@ -1,6 +1,7 @@
 " VIM config
 set nocompatible
 " =============== VUNDLE BEGIN ==============
+" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 filetype off                   " required!
 
 set rtp+=~/.vim/bundle/vundle/
@@ -30,13 +31,15 @@ Bundle 'scrooloose/syntastic'
 Bundle 'majutsushi/tagbar'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
-Bundle 'honza/snipmate-snippets'
 Bundle 'vim-scripts/tComment'
 Bundle 'vim-scripts/VisIncr'
 Bundle 'wikitopian/hardmode'
 Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/neosnippet'
 Bundle 'vim-scripts/closetag.vim'
+Bundle 'paradigm/TextObjectify'
+Bundle 'coderifous/textobj-word-column.vim'
+" Bundle 'honza/snipmate-snippets'
 " Bundle 'ervandew/eclim'
 " Bundle 'nathanaelkane/vim-indent-guides'
 " Bundle 'garbas/vim-snipmate'
