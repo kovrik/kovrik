@@ -39,7 +39,6 @@ Bundle 'Shougo/neosnippet'
 Bundle 'vim-scripts/closetag.vim'
 Bundle 'paradigm/TextObjectify'
 Bundle 'coderifous/textobj-word-column.vim'
-" Bundle 'honza/snipmate-snippets'
 " Bundle 'ervandew/eclim'
 " Bundle 'nathanaelkane/vim-indent-guides'
 " Bundle 'garbas/vim-snipmate'
@@ -54,6 +53,9 @@ Bundle 'EasyGrep'
 " Bundle 'VimOutliner'
 " =============== VUNDLE END ==============
 " set background=dark
+
+set timeout timeoutlen=1000 ttimeoutlen=100
+
 set modelines=0
 set lines=51 columns=189 " Default window size
 set autoindent " tun autoindentation on
