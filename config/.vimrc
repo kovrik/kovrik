@@ -25,7 +25,7 @@ Bundle 'fholgado/minibufexpl.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'thinca/vim-quickrun'
 Bundle 'aaronbieber/quicktask'
-Bundle 'xolox/vim-session'
+" Bundle 'xolox/vim-session'
 Bundle 'majutsushi/tagbar'
 Bundle 'MarcWeber/vim-addon-mw-utils'
  " dependency
@@ -35,6 +35,8 @@ Bundle 'vim-scripts/VisIncr'
 Bundle 'wikitopian/hardmode'
 Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/neosnippet'
+" Bundle 'Shougo/unite.vim'
+" Bundle 'Shougo/vimproc.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'vim-scripts/closetag.vim'
 Bundle 'paradigm/TextObjectify'
@@ -416,6 +418,83 @@ filetype plugin on
 filetype indent on
 
 set nopaste
+
+
+" " Unite {{{
+"     augroup UniteAutoCmd
+"       autocmd!
+"     augroup END
+"     function! s:unite_tabs_and_windows()
+"         nmap <buffer> <C-h> <C-w>h
+"         nmap <buffer> <C-j> <C-w>j
+"         nmap <buffer> <C-k> <C-w>k
+"         nmap <buffer> <C-l> <C-w>l
+"         imap <buffer> <C-h> <Esc><C-w>h
+"         imap <buffer> <C-j> <Esc><C-w>j
+"         imap <buffer> <C-k> <Esc><C-w>k
+"         imap <buffer> <C-l> <Esc><C-w>l
+"         nmap <buffer> H gT
+"         nmap <buffer> L gt
+"         nmap <buffer> <leader>x :bd!<CR>
+"     endfunction
+"     let g:unite_data_directory = '~/.vim/tmp/unite/'
+"     let g:unite_source_process_enable_confirm = 1
+"     let g:unite_source_history_yank_enable = 1
+"     let g:unite_enable_split_vertically = 0
+"     let g:unite_winheight = 20
+"     let g:unite_source_directory_mru_limit = 300
+"     let g:unite_source_file_mru_limit = 300
+"     let g:unite_source_file_mru_filename_format = ':~:.'
+"     let g:unite_source_grep_command = 'ack'
+"     let g:unite_source_grep_default_opts = '--column --no-color --nogroup --with-filename'
+"     let g:unite_source_grep_recursive_opt = ''
+"     nno <leader>a :<C-u>Unite grep -default-action=above<CR>
+"     nno <leader>A :<C-u>execute 'Unite grep:.::' . expand("<cword>") . ' -default-action=above -auto-preview'<CR>
+"     nno <leader>b :<C-u>Unite buffer -buffer-name=buffers -start-insert<CR>
+"     "nno <leader><leader> :<C-u>UniteWithCurrentDir buffer file -buffer-name=united -start-insert<CR>
+"     nno <leader>ps :<C-u>:Unite process -buffer-name=processes -start-insert<CR>
+"     nno <leader>u :<C-u>Unite<space>
+"     nno <C-p> :<C-u>:Unite history/yank -buffer-name=yanks<CR>
+"     nno // :<C-u>:Unite line -buffer-name=lines -start-insert -direction=botright -winheight=10<CR>
+"     function! s:unite_settings()
+"         imap <buffer> jj <Plug>(unite_insert_leave)
+"         imap <buffer> <C-w> <Plug>(unite_delete_backward_path)
+"         imap <buffer> <leader> <Esc><leader>
+"         call s:unite_tabs_and_windows()
+"     endfunction
+"     autocmd UniteAutoCmd FileType unite call s:unite_settings()
+"     " wimviki replacement {{{
+"         map <leader>W :<C-u>Unite file file/new -buffer-name=notes -start-insert
+"                     \ -toggle -default-action=split -profile-name=files
+"                     \ -input=/Volumes/Vimwiki/<CR>
+"     " }}}
+"     " VimFiler {{{
+"         let g:vimfiler_data_directory = expand('~/.vim/tmp/vimfiler/')
+"         let g:vimfiler_safe_mode_by_default = 0
+"         let g:vimfiler_execute_file_list = { "_": "vim" }
+"         nno ` :<C-u>:VimFilerBufferDir -buffer-name=explorer -toggle<CR>
+"         function! s:vimfiler_settings()
+"             call s:unite_tabs_and_windows()
+"             nmap <buffer> - <Plug>(vimfiler_switch_to_parent_directory)
+"             nmap <buffer> % <Plug>(vimfiler_new_file)
+"             nmap <buffer> <Backspace> <C-^>
+"             nmap <buffer> <leader>x <Plug>(vimfiler_exit)
+"             nmap <buffer> <leader>X <Plug>(vimfiler_exit)
+"         endfunction
+"         autocmd UniteAutoCmd Filetype vimfiler call s:vimfiler_settings()
+"     " }}}
+"     " Ref {{{
+"         let g:ref_use_vimproc = 1
+"         let g:ref_open = 'vsplit'
+"         let g:ref_cache_dir = expand('~/.vim/tmp/ref_cache/')
+"         nno <leader>K :<C-u>Unite ref/erlang -buffer-name=erlang_docs -start-insert -vertical -default-action=split<CR>
+"     " }}}
+"     " netrw {{{
+"         let g:netrw_http_cmd='curl -0 -k -L -vv'
+"         let g:netrw_http_xcmd='-o'
+"     " }}}
+" " }}}
+
 
 " set statusline=
 " set statusline +=%#Identifier#\ %n\ %*                  " buffer number
