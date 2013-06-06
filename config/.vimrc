@@ -16,7 +16,7 @@ Bundle 'vim-scripts/Colour-Sampler-Pack'
 Bundle 'c9s/perlomni.vim'
 Bundle 'vim-scripts/perl-support.vim'
 Bundle 'vim-scripts/pmd.vim'
-Bundle 'kien/ctrlp.vim'
+" Bundle 'kien/ctrlp.vim'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'tpope/vim-surround'
@@ -35,8 +35,8 @@ Bundle 'vim-scripts/VisIncr'
 Bundle 'wikitopian/hardmode'
 Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/neosnippet'
-" Bundle 'Shougo/unite.vim'
-" Bundle 'Shougo/vimproc.vim'
+Bundle 'Shougo/unite.vim'
+Bundle 'Shougo/vimproc.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'vim-scripts/closetag.vim'
 Bundle 'paradigm/TextObjectify'
@@ -412,6 +412,20 @@ endfunc
 
 highlight NonText     guifg=#444444 guibg=#333333
 highlight SpecialKey  guifg=#333333
+
+" UNITE BEGIN =================
+" File searching like CtrlP
+nnoremap <C-p> :Unite file_rec/async<cr>
+
+" Content searching like ack.vim
+nnoremap <space>/ :Unite grep:.<cr>
+
+" Buffer switching like LustyJuggers
+nnoremap <space>s :Unite -quick-match buffer<cr>
+
+" Yank history like yankring
+" nnoremap <space>y :Unite history/yanks<cr>
+" UNITE END   =================
 
 " turn on filetypes
 filetype on
