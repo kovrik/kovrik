@@ -1,62 +1,79 @@
 " VIM config
 set nocompatible
+
+let auto_install_bundles = 1
 " =============== VUNDLE BEGIN ==============
 " git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 filetype off " required!
+" === Setting up Vundle ==============================================
+    let vundle_installed = 0
+    let vundle_readme = expand('~/.vim/bundle/vundle/README.md')
+    if !filereadable(vundle_readme)
+        echo "Installing Vundle.."
+        echo ""
+        silent !mkdir -p ~/.vim/bundle
+        silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+        let vundle_installed = 1
+    endif
+    set rtp+=~/.vim/bundle/vundle/
+    call vundle#rc()
+    Bundle 'gmarik/vundle'
+    "=== BUNDLES LIST ======================
+    Bundle 'godlygeek/tabular'
+    Bundle 'Raimondi/delimitMate'
+    Bundle 'vim-scripts/Colour-Sampler-Pack'
+    Bundle 'c9s/perlomni.vim'
+    Bundle 'vim-scripts/perl-support.vim'
+    Bundle 'vim-scripts/pmd.vim'
+    Bundle 'kien/ctrlp.vim'
+    " Bundle 'Lokaltog/vim-easymotion'
+    " Bundle 'Lokaltog/vim-powerline'
+    Bundle 'tpope/vim-surround'
+    Bundle 'tpope/vim-fugitive'
+    Bundle 'fholgado/minibufexpl.vim'
+    Bundle 'scrooloose/nerdtree'
+    Bundle 'thinca/vim-quickrun'
+    Bundle 'aaronbieber/quicktask'
+    " Bundle 'xolox/vim-session'
+    Bundle 'majutsushi/tagbar'
+    Bundle 'MarcWeber/vim-addon-mw-utils'
+     " dependency
+    Bundle 'tomtom/tlib_vim'
+    Bundle 'vim-scripts/tComment'
+    Bundle 'vim-scripts/VisIncr'
+    Bundle 'wikitopian/hardmode'
+    Bundle 'Shougo/neocomplcache'
+    Bundle 'Shougo/neosnippet'
+    " Bundle 'Shougo/unite.vim'
+    Bundle 'Shougo/vimproc.vim'
+    Bundle 'scrooloose/syntastic'
+    Bundle 'vim-scripts/closetag.vim'
+    Bundle 'paradigm/TextObjectify'
+    Bundle 'coderifous/textobj-word-column.vim'
+    " Bundle 'ervandew/eclim'
+    " Bundle 'nathanaelkane/vim-indent-guides'
+    " Bundle 'garbas/vim-snipmate'
+    " Bundle 'Townk/vim-autoclose'
+    " Bundle 'Gundo'
+    Bundle 'CSApprox'
+    Bundle 'ZenCoding.vim'
+    Bundle 'MatchTag'
+    Bundle 'matchit.zip'
+    Bundle 'javacomplete'
+    Bundle 'EasyGrep'
+    Bundle 'VimOutliner'
+    Bundle 'gnupg.vim'
+    "=== BUNDLES LIST END ==============
+    if vundle_installed == 1
+        if auto_install_bundles == 1
+            echo "Installing Bundles, please ignore key map error messages..."
+            echo ""
+            :BundleInstall
+        endif
+    endif
+" === Setting up Vundle end ==============================================
 
-" required!
-" let Vundle manage Vundle
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
-"""""""""""""""""""""""""""
-Bundle 'godlygeek/tabular'
-Bundle 'Raimondi/delimitMate'
-Bundle 'vim-scripts/Colour-Sampler-Pack'
-Bundle 'c9s/perlomni.vim'
-Bundle 'vim-scripts/perl-support.vim'
-Bundle 'vim-scripts/pmd.vim'
-" Bundle 'kien/ctrlp.vim'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-fugitive'
-Bundle 'fholgado/minibufexpl.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'thinca/vim-quickrun'
-Bundle 'aaronbieber/quicktask'
-" Bundle 'xolox/vim-session'
-Bundle 'majutsushi/tagbar'
-Bundle 'MarcWeber/vim-addon-mw-utils'
- " dependency
-Bundle 'tomtom/tlib_vim'
-Bundle 'vim-scripts/tComment'
-Bundle 'vim-scripts/VisIncr'
-Bundle 'wikitopian/hardmode'
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/neosnippet'
-Bundle 'Shougo/unite.vim'
-Bundle 'Shougo/vimproc.vim'
-Bundle 'scrooloose/syntastic'
-Bundle 'vim-scripts/closetag.vim'
-Bundle 'paradigm/TextObjectify'
-Bundle 'coderifous/textobj-word-column.vim'
-" Bundle 'ervandew/eclim'
-" Bundle 'nathanaelkane/vim-indent-guides'
-" Bundle 'garbas/vim-snipmate'
-" Bundle 'Townk/vim-autoclose'
-" Bundle 'Gundo'
-Bundle 'CSApprox'
-Bundle 'ZenCoding.vim'
-Bundle 'MatchTag'
-Bundle 'matchit.zip'
-Bundle 'javacomplete'
-Bundle 'EasyGrep'
-Bundle 'VimOutliner'
-Bundle 'gnupg.vim'
-"=============== VUNDLE END ==============
 set background=dark
-
 set timeout timeoutlen=1000 ttimeoutlen=100
 
 set modelines=0
@@ -105,8 +122,8 @@ set showcmd                                " показывать незавер
 set matchpairs+=<:>                        " show matching brackets for HTML tags
 set showmatch                              " show first matching parenthesis after inserting the second
 set autoread                               " reread changed files automatically
-set t_Co=256                               " use 256 colors in terminal
 set t_ut=
+set t_Co=256                               " use 256 colors in terminal
 set confirm                                " use dialogs instead of error messages
 set backspace=indent,eol,start             " backspace обрабатывает отступы, концы строк
 set sessionoptions=curdir,buffers,tabpages " опции сессий - перейти в текущию директорию, использовать буферы и табы
@@ -347,14 +364,14 @@ inoremap <F6> <Esc>yyp<c-v>$r-A
 noremap <C-S-I> :call <SID>SynStack()<CR>
 " ====== KEY BINDINGS END  ====================
 
-let g:EasyMotion_leader_key = '<Leader>'
+" let g:EasyMotion_leader_key = '<Leader>'
 
 " powerline
-if has("gui_running")
-  let g:Powerline_symbols = 'fancy'
-else
-  let g:Powerline_symbols = 'compatible'
-endif
+" if has("gui_running")
+"   let g:Powerline_symbols = 'fancy'
+" else
+"   let g:Powerline_symbols = 'compatible'
+" endif
 
 let g:tex_flavor='latex'
 
@@ -379,6 +396,11 @@ let g:miniBufExplMapWindowNavVim    = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs  = 1
 let g:miniBufExplModSelTarget       = 1
+
+" CtrlP
+" Sane Ignore For ctrlp
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_custom_ignore = { 'dir': '/.git$\|/.hg$\|/.svn$\|/tmp$|/bin$|/.cache$' }
 
 " Tab completion
 function! Smart_TabComplete()
@@ -415,31 +437,24 @@ highlight SpecialKey  guifg=#333333
 
 " UNITE BEGIN =================
 " File searching like CtrlP
-nnoremap <C-p> :Unite file_rec/async<cr>
+" nnoremap <C-p> :Unite file_rec/async<cr>
 
 " Content searching like ack.vim
-nnoremap <space>/ :Unite grep:.<cr>
+" nnoremap <space>/ :Unite grep:.<cr>
 
 " Buffer switching like LustyJuggers
-nnoremap <space>s :Unite -quick-match buffer<cr>
+" nnoremap <space>s :Unite -quick-match buffer<cr>
 
 " Yank history like yankring
 " nnoremap <space>y :Unite history/yanks<cr>
 " UNITE END   =================
-
-" turn on filetypes
-filetype on
-filetype plugin on
-filetype indent on
-
-set nopaste
 
 " " Don't save backups of *.gpg files
 " set backupskip+=*.gpg
 " " To avoid that parts of the file is saved to .viminfo when yanking or
 " " deleting, empty the 'viminfo' option.
 " set viminfo=
-" 
+"
 " augroup encrypted
 "   au!
 "   " Disable swap files, and set binary file format before reading the file
@@ -537,121 +552,76 @@ set nopaste
 "     " }}}
 " " }}}
 
-
-" set statusline=
-" set statusline +=%#Identifier#\ %n\ %*                  " buffer number
-" set statusline +=%#PreProc#%{&ff}%*                     " file format
-" set statusline +=%#Number#%y%*                          " file type
-" set statusline +=%#String#\ %<%t%*                      " full path
-" set statusline +=%#SpecialKey#%m%*                      " modified flag
-" set statusline +=%=%*                                   " separator
-" set statusline +=%#Identifier#%5l%*                     " current line
-" set statusline +=%#SpecialKey#/%L%*                     " total lines
-" set statusline +=%#Identifier#%4v\ %*                   " virtual column number
-" set statusline +=%#SpecialKey#0x%04B\ %*                " character under cursor
-
-"Ghetto Powerline
-" let g:last_mode = ""
-"
-" function! Mode()
-"  let l:mode = mode()
-"
-"  if l:mode !=# g:last_mode "Mode change
-"    let g:last_mode = l:mode
-"    if     mode ==# "n"  | hi User2 ctermfg=28  ctermbg=22  cterm=bold | hi User3 ctermfg=22  ctermbg=236
-"    elseif mode ==# "i"  | hi User2 ctermfg=23  ctermbg=231 cterm=bold | hi User3 ctermfg=231 ctermbg=236
-"    elseif mode ==# "R"  | hi User2 ctermfg=231 ctermbg=160 cterm=bold | hi User3 ctermfg=160 ctermbg=236
-"    elseif mode ==? "v"  | hi User2 ctermfg=160 ctermbg=208 cterm=bold | hi User3 ctermfg=208 ctermbg=236
-"    elseif mode ==# "^V" | hi User2 ctermfg=160 ctermbg=208 cterm=bold | hi User3 ctermfg=208 ctermbg=236
-"    endif
-"  endif
-"
-"  if     mode ==# "n"  | return "  NORMAL "
-"  elseif mode ==# "i"  | return "  INSERT "
-"  elseif mode ==# "R"  | return "  REPLACE "
-"  elseif mode ==# "v"  | return "  VISUAL "
-"  elseif mode ==# "V"  | return "  V·LINE "
-"  elseif mode ==# "^V" | return "  V·BLOCK "
-"  else                 | return l:mode
-"  endif
-" endfunc
-"
-" hi link User1 Statusline
-" hi Statusline cterm=NONE
-" hi User1 ctermfg=231 ctermbg=236 cterm=NONE
-"
-" hi User4 ctermfg=238 ctermbg=236 cterm=bold
-" hi User5 ctermfg=76  ctermbg=236 cterm=bold
-" hi User6 ctermfg=196 ctermbg=236 cterm=bold
-"
-" set laststatus=2 "Always show statusline
-" set statusline=%2*%{Mode()}%3*⮀%1*%=%{&enc}\ ⮃\ %{&ff}\ ⮃\ [%5*%{tolower(&ft)}%1*
-" set statusline+=,%6*%{&mod?'+':''}%1*%{&mod?'':'-'}
-" set statusline+=%{&ro?',':''}%6*%{&ro?'⭤':''}%1*]\ [⭡\ %03l:%4*%03v%1*]
-
 " Statusline modifications, added Fugitive Status Line & Syntastic Error Message {{{2
-" let g:last_mode = ''
-" function! Mode()
-"     let l:mode = mode()
-" 
-"     if l:mode !=# g:last_mode
-"         let g:last_mode = l:mode
-" 
-"         hi User2 guifg=#005f00 guibg=#dfff00 gui=BOLD ctermfg=22 ctermbg=190 cterm=BOLD
-"         hi User3 guifg=#FFFFFF guibg=#414243 ctermfg=255 ctermbg=241
-"         hi User4 guifg=#414234 guibg=#2B2B2B ctermfg=241 ctermbg=234
-"         hi User5 guifg=#4e4e4e guibg=#FFFFFF gui=bold ctermfg=239 ctermbg=255 cterm=bold
-"         hi User6 guifg=#FFFFFF guibg=#8a8a8a ctermfg=255 ctermbg=245
-"         hi User7 guifg=#ffff00 guibg=#8a8a8a gui=bold ctermfg=226 ctermbg=245 cterm=bold
-"         hi User8 guifg=#8a8a8a guibg=#414243 ctermfg=245 ctermbg=241
-" 
-"         if l:mode ==# 'n'
-"             hi User3 guifg=#dfff00 ctermfg=190
-"         elseif l:mode ==# "i"
-"             hi User2 guifg=#005fff guibg=#FFFFFF ctermfg=27 ctermbg=255
-"             hi User3 guifg=#FFFFFF ctermfg=255
-"         elseif l:mode ==# "R"
-"             hi User2 guifg=#FFFFFF guibg=#df0000 ctermfg=255 ctermbg=160
-"             hi User3 guifg=#df0000 ctermfg=160
-"         elseif l:mode ==? "v" || l:mode ==# "^V"
-"             hi User2 guifg=#4e4e4e guibg=#ffaf00 ctermfg=239 ctermbg=214
-"             hi User3 guifg=#ffaf00 ctermfg=214
-"         endif
-"     endif
-" 
-"     if l:mode ==# "n"
-"         return " NORMAL "
-"     elseif l:mode ==# "i"
-"         return " INSERT "
-"     elseif l:mode ==# "R"
-"         return " REPLACE "
-"     elseif l:mode ==# "v"
-"         return " VISUAL "
-"     elseif l:mode ==# "V"
-"         return " V·LINE "
-"     elseif l:mode ==# "^V"
-"         return " V·BLOCK "
-"     else
-"         return l:mode
-"     endif
-" endfunction
-" 
-" set statusline=%2*%{Mode()}%3*⮀%1*
-" set statusline+=%#StatusLine#
-" set statusline+=%{strlen(fugitive#statusline())>0?'\ ⭠\ ':''}
-" set statusline+=%{matchstr(fugitive#statusline(),'(\\zs.*\\ze)')}
-" set statusline+=%{strlen(fugitive#statusline())>0?'\ \ ⮁\ ':'\ '}
-" set statusline+=%f\ %{&ro?'⭤':''}%{&mod?'+':''}%<
-" set statusline+=%4*⮀
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%=
-" set statusline+=%4*⮂
-" set statusline+=%#StatusLine#
-" set statusline+=\ %{strlen(&fileformat)>0?&fileformat.'\ ⮃\ ':''}
-" set statusline+=%{strlen(&fileencoding)>0?&fileencoding.'\ ⮃\ ':''}
-" set statusline+=%{strlen(&filetype)>0?&filetype:''}
-" set statusline+=\ %8*⮂
-" set statusline+=%7*\ %p%%\
-" set statusline+=%6*⮂%5*⭡\ \ %l:%c\
+let g:last_mode = ''
+function! Mode()
+    let l:mode = mode()
+
+    if l:mode !=# g:last_mode
+        let g:last_mode = l:mode
+
+        hi User2 guifg=#005f00 guibg=#dfff00 gui=BOLD ctermfg=22 ctermbg=190 cterm=BOLD
+        hi User3 guifg=#FFFFFF guibg=#414243 ctermfg=255 ctermbg=241
+        hi User4 guifg=#414234 guibg=#2B2B2B ctermfg=241 ctermbg=234
+        hi User5 guifg=#4e4e4e guibg=#FFFFFF gui=bold ctermfg=239 ctermbg=255 cterm=bold
+        hi User6 guifg=#FFFFFF guibg=#8a8a8a ctermfg=255 ctermbg=245
+        hi User7 guifg=#ffff00 guibg=#8a8a8a gui=bold ctermfg=226 ctermbg=245 cterm=bold
+        hi User8 guifg=#8a8a8a guibg=#414243 ctermfg=245 ctermbg=241
+
+        if l:mode ==# 'n'
+            hi User3 guifg=#dfff00 ctermfg=190
+        elseif l:mode ==# "i"
+            hi User2 guifg=#005fff guibg=#FFFFFF ctermfg=27 ctermbg=255
+            hi User3 guifg=#FFFFFF ctermfg=255
+        elseif l:mode ==# "R"
+            hi User2 guifg=#FFFFFF guibg=#df0000 ctermfg=255 ctermbg=160
+            hi User3 guifg=#df0000 ctermfg=160
+        elseif l:mode ==? "v" || l:mode ==# "^V"
+            hi User2 guifg=#4e4e4e guibg=#ffaf00 ctermfg=239 ctermbg=214
+            hi User3 guifg=#ffaf00 ctermfg=214
+        endif
+    endif
+
+    if l:mode ==# "n"
+        return " NORMAL "
+    elseif l:mode ==# "i"
+        return " INSERT "
+    elseif l:mode ==# "R"
+        return " REPLACE "
+    elseif l:mode ==# "v"
+        return " VISUAL "
+    elseif l:mode ==# "V"
+        return " V·LINE "
+    elseif l:mode ==# "^V"
+        return " V·BLOCK "
+    else
+        return l:mode
+    endif
+endfunction
+
+set statusline=%2*\ %{Mode()}%3*%1*
+set statusline+=%#StatusLine#
+set statusline+=%{strlen(fugitive#statusline())>0?'\ \ ':''}
+set statusline+=%{matchstr(fugitive#statusline(),'(\\zs.*\\ze)')}
+set statusline+=%{strlen(fugitive#statusline())>0?'\ \ \ ':'\ '}
+set statusline+=%f\ %{&ro?'⭤':''}%{&mod?'+':''}%<
+set statusline+=%4*
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%=
+set statusline+=%4*
+set statusline+=%#StatusLine#
+set statusline+=\ %{strlen(&fileformat)>0?&fileformat.'\ \ ':''}
+set statusline+=%{strlen(&fileencoding)>0?&fileencoding.'\ \ ':''}
+set statusline+=%{strlen(&filetype)>0?&filetype:''}
+set statusline+=\ %8*
+set statusline+=%7*\ %p%%\
+set statusline+=%6*%5*\ \ %l:%c\
 " " }}}2
+
+" turn on filetypes
+set nopaste
+filetype on
+filetype plugin on
+filetype indent on
+
