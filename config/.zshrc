@@ -55,4 +55,6 @@ alias l="ls -lha"
 
 PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info) %{$fg_bold[blue]%}%{$fg[yellow]%}%(1j.[%j] .)% %{$reset_color%}'
 
+autoload -U select-word-style
+select-word-style bash
 
