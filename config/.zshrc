@@ -112,4 +112,4 @@ ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[green]%}!"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}?"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
-export PS1="${PWD/#$HOME/~} ($(git_prompt_info)) %{$fg[cyan]%}λ%{$reset_color%}"
+PROMPT="${PWD/#$HOME/~} ($(git_prompt_info)) %{$fg[cyan]%}λ%{$reset_color%}"
