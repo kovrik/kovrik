@@ -105,11 +105,13 @@ unset GREP_OPTIONS
 
 source /Users/ivangoncharov/.iterm2_shell_integration.zsh
 
+setopt promptsubst
+
 ## Prompt configuration.
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[magenta]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[green]%}!"
+ZSH_THEME_GIT_PROMPT_PREFIX=" [%{$fg[magenta]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}]"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[green]%}*"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}?"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
-PROMPT="${PWD/#$HOME/~} ($(git_prompt_info)) %{$fg[cyan]%}λ%{$reset_color%}"
+PROMPT='${PWD/#$HOME/~}$(git_prompt_info) %{$fg[cyan]%}λ%{$reset_color%}'
